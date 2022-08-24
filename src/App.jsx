@@ -5,6 +5,7 @@ import Tasks from './components/Tasks';
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -51,8 +52,11 @@ function App() {
 
   return (
     <div className="container">
-      <Header />
-      <AddTask addTask={addTask} />
+      <Header
+        handleShowAddTask={() => setShowAddTask(!showAddTask)}
+        showAddTask={showAddTask}
+      />
+      {showAddTask && <AddTask addTask={addTask} />}
       {tasks.length > 0 ? (
         <Tasks
           tasks={tasks}
